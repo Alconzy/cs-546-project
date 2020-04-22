@@ -1,0 +1,41 @@
+.index-card-content {
+  min-height: 100px;
+  max-height: 100px;
+  overflow: hidden;
+}
+
+#search {
+  padding-left: 50px;
+}
+
+.bubble {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  background-color: red;
+  border-radius: 50%;
+  z-index: 100;
+  text-align: center;
+  line-height: 30px;
+  color: white;
+  user-select: none;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+#payment {
+  margin-top: 20px;
+}
+
+nav {
+  margin-bottom: 20px;
+}
+
+.mycard {
+  height: 150px;
+}
+.mycard > .card-image{
+  width: 150px;
+}
