@@ -5,6 +5,10 @@ const userData = require('../data').users;
 const commentData = require('../data').comments;
 
 // add product
+router.get("/add", async (req, res) => {
+    res.render('addproduct', {});
+});
+
 router.post("/add", async (req, res) => {
     let product = req.body;
     await productData.addProduct(product);
