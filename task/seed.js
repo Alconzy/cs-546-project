@@ -24,11 +24,19 @@ const main = async () => {
     await products.addProduct({			
         name: "White's Sport Sweatshirt",
         description: "Perfect sweatshirt for any sport or outdoor relatited activity. So stylish that it is perfect for any occasion.",
-        image: "man4.webp",
+        image: "man3.webp",
         tags: "Man",
         stocks: 8,
         price: 60,
-        rating: 40});    
+        rating: 5});    
+    await products.addProduct({			
+        name: "Black Shirt With White Stipes",
+        description: "Black shirt with white stripes. It looks stylish wherever you go and you can wear it for any occasion.",
+        image: "man4.webp",
+        tags: "Man",
+        stocks: 2,
+        price: 20,
+        rating: 5});    
     console.log("Done seeding List");
 	await db.serverConfig.close();
 };
