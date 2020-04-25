@@ -4,12 +4,7 @@ const productData = require('../data').products;
 const userData = require('../data').users;
 const commentData = require('../data').comments;
 
-// add product
-router.get("/add", async (req, res) => {
-    res.render('addproduct', {info: ''});
-});
-
-
+//Add Product
 router.post("/add", async (req, res) => {
     let product = req.body;
     await productData.addProduct(product);
