@@ -9,7 +9,7 @@ const main = async () => {
         name: "Black Pants",
         description: "A pair black pants with a white stripe on the side. Perfect for any occasion.",
         image: "man1.webp",
-        tags: "Man",
+        tags: "man",
         stocks: 20,
         price: 65,
         rating: 5});
@@ -17,7 +17,7 @@ const main = async () => {
         name: "Beige Winter Coat",
         description: "A heavy winter coat that looks stylish. Perfect for any occasion.",
         image: "man2.webp",
-        tags: "Man",
+        tags: "man",
         stocks: 8,
         price: 90,
         rating: 5});        
@@ -25,7 +25,7 @@ const main = async () => {
         name: "White's Sport Sweatshirt",
         description: "Perfect sweatshirt for any sport or outdoor relatited activity. So stylish that it is perfect for any occasion.",
         image: "man3.webp",
-        tags: "Man",
+        tags: "man",
         stocks: 8,
         price: 60,
         rating: 5});    
@@ -33,10 +33,11 @@ const main = async () => {
         name: "Black Shirt With White Stipes",
         description: "Black shirt with white stripes. It looks stylish wherever you go and you can wear it for any occasion.",
         image: "man4.webp",
-        tags: "Man",
+        tags: "man",
         stocks: 2,
         price: 20,
         rating: 5});    
+        
     console.log("Done seeding List");
 	await db.serverConfig.close();
 };
