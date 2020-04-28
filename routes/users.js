@@ -78,6 +78,13 @@ router.post('/login', async (req, res) => {
 	}
 });
 
+router.get('/logout', async(req, res) => {
+	req.session.destroy();
+	res.render('', {
+		'info': 'Logged out!'
+	});
+});
+
 router.get('/cart_number', async (req, res) => {
 	res.json({ 'num': req.session.user.cart.length });
 });

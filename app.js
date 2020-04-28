@@ -40,7 +40,7 @@ app.all('/*', function (req, res, next) {
     // filter rules
     if (url === '/' || url.search('category') != -1 || url.search('login') != -1
         || url.search('register') != -1 || url.search('search') != -1
-        || url.search('detail') != -1) {
+        || url.search('detail') != -1 || url.search('forgetpassword') != -1) {
       next();
     } else {
       res.redirect('/login.html')

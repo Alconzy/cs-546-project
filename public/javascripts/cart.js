@@ -23,4 +23,12 @@ $(function() {
     $('#payment').click(function () {
         $('#modal').modal('open');
     });
+
+    $('.logOut').click(function () {
+        console.log("Logout");
+
+        $.get('/users/logout', function (data) {
+            //console.log(data.comm);
+        });
+    });
 });
