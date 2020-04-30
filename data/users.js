@@ -19,6 +19,7 @@ let exportedMethods = {
 		let newUser = {
 			email: user.email,
 			password: user.password,
+			fullName : '',
 			orderHistory: [],
 			paymentInfo: '',
 			address: '',
@@ -40,6 +41,7 @@ let exportedMethods = {
 		let updatedUser = {
 			email: user.email,
 			password: user.password,
+			fullName: user.fullName,
 			orderHistory: user.orderHistory,
 			paymentInfo: user.paymentInfo,
 			address: user.address,
@@ -60,9 +62,9 @@ let exportedMethods = {
 		}
 	},
 
-	async updateNewPassword(id, pass) {
+	async updateNewPassword(email, pass) {
 		const userCollection = await users();
-		let updatePassword = await userCollection.updateOne({ _id: id }, { $set: { password: pass } });
+		let updatePassword = await userCollection.updateOne({ email: email }, { $set: { password: pass } });
 		if (!updatePassword.matchedCount && !updatePassword.modifiedCount) throw 'Update Password Failed';
 		return ({ "msg": "success" });
 	}

@@ -52,6 +52,7 @@ router.post("/change", async (req, res) => {
 		req.session.user.password = user.password;
 		req.session.user.paymentInfo = user.paymentInfo;
 		req.session.user.address = user.address;
+		req.session.user.fullName = user.fullName;
 		user = await usersData.updateUser(req.session.user);
 		res.redirect('/changeinfo');
 	} catch (e) {
@@ -89,17 +90,21 @@ router.get('/cart_number', async (req, res) => {
 	res.json({ 'num': req.session.user.cart.length });
 });
 
-router.post('/forget_pasword', async (req, res) => {
+router.post('/forgetpassword', async (req, res) => {
 	try {
+		console.log("inside")
 		if (req.body.email) {
 			let emailAddress = req.body.email;
-			let data = await usersData.sendForgetPasswordMail(emailAddress);
+			let data = await usersData.checkEmail(emailAddress);
+			console.log("inside")
 			if (data.msg) {
 				res.render('login', {
 					'info': data.msg
 				});
 			} else {
-				res.json({ "userData": data.data });
+				res.render('forgetpassword', {
+					'email_info': req.body.email
+				});
 			}
 		} else {
 			res.json({ "err": 1, "msg": "please enter email address." });
@@ -113,12 +118,12 @@ router.post('/forget_pasword', async (req, res) => {
 router.post('/update_new_passoword', async (req, res) => {
 	try {
 		if (req.body.new_password) {
-			let id = rew.body._id;
+			let email = req.body.email;
 			let new_password = req.body.new_password;
-			let updateData = await usersData.updateNewPassword(id, new_password);
+			let updateData = await usersData.updateNewPassword(email, new_password);
 			if (updateData.msg) {
 				res.render('login', {
-					'info': "Please Login."
+					'info': "Password has been changed successfully."
 				});
 			} else {
 				res.render('login', {
