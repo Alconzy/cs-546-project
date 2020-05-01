@@ -42,7 +42,7 @@ router.post("/search", async (req, res) => {
     console.log(products);
     res.render('category', {
         "products": products
-    });
+    }); 
 });
 
 // cart page
