@@ -100,10 +100,14 @@ router.get('/cart_number', async (req, res) => {
 });
 
 router.get('/forgetpassword/:id', async (req, res) => {
-    let data = await usersData.getUserById(req.params.id);
-	res.render('forgetpassword', {
-		'email_info': data.email
-	});
+	try {
+		let data = await usersData.getUserById(req.params.id);
+		res.render('forgetpassword', {
+			'email_info': data.email
+		}); 
+	} catch (e) {
+		res.json({ "err": 1, "msg": "Please enter valid ID." });
+	}
 });
 
 router.post('/forgetpassword', async (req, res) => {
