@@ -67,7 +67,7 @@ let exportedMethods = {
 		let updatePassword = await userCollection.updateOne({ email: email }, { $set: { password: pass } });
 		if (!updatePassword.matchedCount && !updatePassword.modifiedCount) throw 'Update Password Failed';
 		return ({ "msg": "success" });
-	}
+	},
 };
 
 module.exports = exportedMethods;

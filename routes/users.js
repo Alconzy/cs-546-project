@@ -2,6 +2,15 @@ const express = require('express');
 const router = express.Router();
 const data = require('../data');
 const usersData = data.users;
+const nodemailer = require('nodemailer');
+
+let transporter = nodemailer.createTransport({
+    service: 'gmail',
+	auth: {
+	  user: 'shopsemall80@gmail.com',
+	  pass: 'v8]QM{>]5Q`cWGMe'
+	}
+  });
 
 router.post("/register", async (req, res) => {
 	try {
@@ -90,6 +99,13 @@ router.get('/cart_number', async (req, res) => {
 	res.json({ 'num': req.session.user.cart.length });
 });
 
+router.get('/forgetpassword/:id', async (req, res) => {
+    let data = await usersData.getUserById(req.params.id);
+	res.render('forgetpassword', {
+		'email_info': data.email
+	});
+});
+
 router.post('/forgetpassword', async (req, res) => {
 	try {
 		console.log("inside")
@@ -102,8 +118,20 @@ router.post('/forgetpassword', async (req, res) => {
 					'info': data.msg
 				});
 			} else {
-				res.render('forgetpassword', {
-					'email_info': req.body.email
+				let mailOptions = {
+					from: 'shopsemall80@gmail.com',
+					to: emailAddress,
+					subject: 'Reset Password Link',
+					text: `Hello ${typeof data.fullName == 'undefined' ? "User" : data.fullName},\n\nHere is the link to reset your password: http://${req.get('host')}/users/forgetpassword/${data.data._id}.\n\nIf you have any troubles, email shopsemall80@gmail.com.`
+				};
+				transporter.sendMail(mailOptions, (error, info) => {``
+					if (error) {
+						return console.log(error.message);
+					}
+					console.log('Email sent: ' + info.response);
+				});				
+				res.render('login', {
+						'info': "Email Sent"
 				});
 			}
 		} else {
