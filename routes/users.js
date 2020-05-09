@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const data = require('../data');
 const usersData = data.users;
+
 const nodemailer = require('nodemailer');
 
 let transporter = nodemailer.createTransport({
@@ -61,6 +62,7 @@ router.post("/change", async (req, res) => {
 		req.session.user.password = user.password;
 		req.session.user.paymentInfo = user.paymentInfo;
 		req.session.user.address = user.address;
+
 		req.session.user.fullName = user.fullName;
 		user = await usersData.updateUser(req.session.user);
 		res.redirect('/changeinfo');
@@ -99,6 +101,7 @@ router.get('/cart_number', async (req, res) => {
 	res.json({ 'num': req.session.user.cart.length });
 });
 
+
 router.get('/forgetpassword/:id', async (req, res) => {
 	try {
 		let data = await usersData.getUserById(req.params.id);
@@ -122,6 +125,7 @@ router.post('/forgetpassword', async (req, res) => {
 					'info': data.msg
 				});
 			} else {
+
 				let mailOptions = {
 					from: 'shopsemall80@gmail.com',
 					to: emailAddress,
@@ -150,6 +154,7 @@ router.post('/forgetpassword', async (req, res) => {
 router.post('/update_new_passoword', async (req, res) => {
 	try {
 		if (req.body.new_password) {
+
 			let email = req.body.email;
 			let new_password = req.body.new_password;
 			let updateData = await usersData.updateNewPassword(email, new_password);
