@@ -36,8 +36,40 @@ const main = async () => {
             rating: 5,
             color:"Blue",
             sellCount:0});   
+            
     await products.addProduct({			
+        name: "Red Button Jacket",
+        description: "Goot looking black red buttoned jacket. Used to wear over other clothing and protect babies from temperature.",
+        image: "baby4.webp",
+        tags: "baby",
+        stocks: 2,
+        price: 45,
+        rating: 5});    
 
+    await products.addProduct({			
+        name: "Black Kids Coat",
+        description: "Looks fashionable and is good for cold weather..",
+        image: "kid1.webp",
+        tags: "kids",
+        stocks: 40,
+        price: 40,
+        rating: 5});
+    await products.addProduct({			
+        name: "Red Adidas Sweatshirt",
+        description: "Light sweatshirt used for sporting and looks fashionable.",
+        image: "kid2.webp",
+        tags: "kids",
+        stocks: 8,
+        price: 50,
+        rating: 5});        
+    await products.addProduct({			
+        name: "Black Kids Sweatpants",
+        description: "Black sweatpants with colored stripe on the side. Good for outdoor and indoor activities.",
+        image: "kid3.webp",
+        tags: "kids",
+        stocks: 8,
+        price: 35,
+        rating: 5});    
     await products.addProduct({			
             name: "Black Pants",
             description: "A pair black pants with a white stripe on the side. Perfect for any occasion.",
