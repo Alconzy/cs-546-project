@@ -1,7 +1,7 @@
 const mongoCollections = require('../config/mongoCollections');
 const users = mongoCollections.users;
 const uuid = require('uuid');
-
+//
 let exportedMethods = {
 	async getUserById(id) {
 		const userCollection = await users();
@@ -53,7 +53,7 @@ let exportedMethods = {
 		if (!updateInfo.matchedCount && !updateInfo.modifiedCount) throw 'Update failed';
 		return this.getUserById(user._id);
 	},
-
+//above contributed by Hongfeng Ou except for adding adminlevel and full name (for 'retrieve password' functionality)
 	async checkEmail(emailAddress) {
 		const userCollection = await users();
 		let userEmail = await userCollection.findOne({ email: emailAddress })
