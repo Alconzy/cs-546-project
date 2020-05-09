@@ -3,9 +3,16 @@
   max-height: 100px;
   overflow: hidden;
 }
+input[type="text"]:disabled {
+  background: #ccc;
+}
 
 #search {
   padding-left: 50px;
+}
+
+.clear {
+  all: unset;
 }
 
 .bubble {

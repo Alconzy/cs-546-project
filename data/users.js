@@ -8,6 +8,11 @@ let exportedMethods = {
 		const user = await userCollection.findOne({ _id: id });
 		return user;
 	},
+	async getAllUsers() {
+		const userCollection = await users();
+		const user = await userCollection.find({}).toArray();
+		return user;
+	},
 	async userLogin(email, password) {
 		const userCollection = await users();
 		const user = await userCollection.find({ 'email': email, 'password': password }).toArray();

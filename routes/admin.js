@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const commentData = require('../data').comments;
+const userData = require('../data').users;
 
 router.use('/*', async (req, res, next) => {
     console.log(req.session.user.email + req.session.user.adminLevel);
@@ -18,4 +18,9 @@ router.use('/*', async (req, res, next) => {
 router.get('/', async (req, res) => {
     res.render('admin', {});
 });
+
+router.get('/users', async (req, res) => {      
+    res.render('OtherUsers', {users: await userData.getAllUsers()});
+});
+
 module.exports = router;

@@ -124,14 +124,13 @@ router.post('/forgetpassword', async (req, res) => {
 					'info': data.msg
 				});
 			} else {
-
 				let mailOptions = {
 					from: 'shopsemall80@gmail.com',
 					to: emailAddress,
 					subject: 'Reset Password Link',
 					text: `Hello ${typeof data.fullName == 'undefined' ? "User" : data.fullName},\n\nHere is the link to reset your password: http://${req.get('host')}/users/forgetpassword/${data.data._id}.\n\nIf you have any troubles, email shopsemall80@gmail.com.`
 				};
-				transporter.sendMail(mailOptions, (error, info) => {``
+				transporter.sendMail(mailOptions, (error, info) => {
 					if (error) {
 						return console.log(error.message);
 					}
