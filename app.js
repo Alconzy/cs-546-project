@@ -55,7 +55,7 @@ app.all('/*', function (req, res, next) {
     if (url === '/' || url.search('category') != -1 || url.search('login') != -1
         || url.search('register') != -1 || url.search('search') != -1
         || url.search('detail') != -1 || url.search('carouselList') != -1 ||
-        url.search('all') != -1 || url === '/users') {
+        url.search('all') != -1 || url === '/users' || url === '/forgetpassword.html' || url.search('forgetpassword')) {
       next();
     } else {
       res.redirect('/login.html')
