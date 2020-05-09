@@ -117,7 +117,7 @@ router.post('/forgetpassword', async (req, res) => {
 	try {
 		console.log("inside")
 		if (req.body.email) {
-			let emailAddress = req.body.email;
+			let emailAddress = req.body.email.trim();
 			let data = await usersData.checkEmail(emailAddress);
 			console.log("inside")
 			if (data.msg) {
