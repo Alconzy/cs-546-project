@@ -184,6 +184,24 @@ router.get("/order/delete/:id", async (req, res) => {
     }
 });
 
+// random sort the array
+function randomSort(a, b) {
+    return Math.random()>.5 ? -1 : 1;
+}
+/**
+ * CarouselList access the carousel ’product’ in main page, 
+ * and then return json string, because Ajax requires js get json data from server, 
+ * therefore we need to add as well as modify some methods to return res.json() which return the json data result of query.
+ */
+router.get('/carouselList', async (req, res) => {
+    let products = await productData.getAllProduct();
+    products = products.sort(randomSort);
+
+    let carouselList = products.splice(0, 5);
+
+    res.json({"carouselList": carouselList});
+});
+
 // filter by high to low / low to high price and color 
 router.post("/productFilter", async (req, res) => {
     try {
