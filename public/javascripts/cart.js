@@ -3,6 +3,7 @@ $(function() {
     $('.modal').modal();
 
     $.get('/users/cart_number', function (data) {
+        console.log(data)
         if (data.num) {
             $('#cart-number').text(data.num);
         } else {
@@ -22,5 +23,13 @@ $(function() {
 
     $('#payment').click(function () {
         $('#modal').modal('open');
+    });
+
+    $('.logOut').click(function () {
+        console.log("Logout");
+
+        $.get('/users/logout', function (data) {
+            //console.log(data.comm);
+        });
     });
 });

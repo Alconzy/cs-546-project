@@ -14,7 +14,9 @@ var app = express();
 app.engine('html', exphbs({
   layoutsDir: 'views',
   defaultLayout: 'layout',
-  extname: '.html'
+  extname: '.html',
+  helpers: require("./public/javascripts/helper.js").helpers,extname: 'html'
+
 }));
 
 app.set('view engine', 'html');
@@ -40,7 +42,7 @@ app.all('/*', function (req, res, next) {
     // filter rules
     if (url === '/' || url.search('category') != -1 || url.search('login') != -1
         || url.search('register') != -1 || url.search('search') != -1
-        || url.search('detail') != -1) {
+        || url.search('detail') != -1 || url.search('forgetpassword') != -1 || url.search('update_new_passoword') != -1) {
       next();
     } else {
       res.redirect('/login.html')

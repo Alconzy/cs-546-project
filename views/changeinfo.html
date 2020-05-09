@@ -11,6 +11,13 @@
 <form method="post" action="/users/change" class="col s12">
     <div class="row">
         <div class="input-field col s6 offset-s3">
+            <i class="material-icons prefix">person</i>
+            <input name="fullName" id="fullName" type="text" class="validate" value="{{user.fullName}}">
+            <label for="fullName">Full Name</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s6 offset-s3">
             <i class="material-icons prefix">email</i>
             <input name="email" id="email" type="email" class="validate" disabled value="{{user.email}}">
             <label for="email">Email</label>
@@ -41,5 +48,8 @@
         <div class="input-field col s6 offset-s3">
             <button class="btn" type="submit">Submit</button>
         </div>
+        <div class="input-field col s6 offset-s3" >
+            <a class="logOut btn-floating halfway-fab waves-effect waves-light red" href="/" ><i class="material-icons" >power_settings_new</i></a>
+        </div>    
     </div>
 </form>

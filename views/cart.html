@@ -27,6 +27,14 @@
     <div class="modal-content">
         <h4>Payment</h4>
         <p>Total: ${{money}}</p>
+
+        <p><strong>Delivered on:&nbsp;</strong>
+            <script>
+                var del = new Date();
+                del.setDate(new Date().getDate() + 5);
+                document.write(del.toDateString());
+            </script>
+        </p>
     </div>
     <div class="modal-footer">
         <a href="/products/payment/{{money}}" class=" modal-action waves-effect waves-green btn-flat">Go Payment</a>
@@ -34,6 +42,14 @@
     </div>
 </div>
 
+{{#ifCond  orderCount }}
+
 <div class="container">
-    <button data-target="modal"  id="payment" class="btn red right waves-effect waves-light">Payment</button>
+    <button data-target="modal" id="payment" class="btn red right waves-effect waves-light">Payment</button>
 </div>
+{{else}}
+<div class="description">
+    <p> Sorry! Cart List is Empty.</p>
+</div>
+
+{{/ifCond }}

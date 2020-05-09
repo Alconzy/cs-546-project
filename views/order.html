@@ -15,9 +15,37 @@
                 </div>
                 <div class="card-action">
                     <a class="red-text" href="/products/order/delete/{{this._id}}">Delete</a>
+                     <a title="Add comment" class="add_comment waves-effect btn" data-id="{{this._id}}"><i
+                        class="large material-icons">comment</i></a>
                 </div>
+                <div class="card-action" >
+
+                </div>    
             </div>
         </div>
     </div>
     {{/each}}
 </ul>
+
+<div id="modal" class="modal">
+    <form action="/comments/add" method="post">
+    <div class="modal-content">
+        <h6>Add Comment</h6>
+        <div class="input-field col s12">
+            <textarea name="comment" id="comment" class="materialize-textarea"></textarea>
+            <label for="comment">Add Comment</label>
+        </div>
+        <div class="input-field col s12">
+            <input name="rating" id="rating" class="validate" type="number" min="0" max="5" step="1" />
+            <label for="rating">Rating</label>
+        </div>
+        <input name="product" type="hidden" id="product" value="" />
+    </div>
+    <div class="modal-footer">
+        <button id="add" href="#!" class="modal-action waves-effect waves-green btn-flat">Add</button>
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+    </div>
+    </form>
+</div>
+
+<script src="/javascripts/detail.js"></script>
