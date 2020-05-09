@@ -15,7 +15,6 @@ let transporter = nodemailer.createTransport({
 
 router.post("/register", async (req, res) => {
 	try {
-
 		let user = req.body;
 		user = await usersData.addUser(user);
 		if (user == null) {

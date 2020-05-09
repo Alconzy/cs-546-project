@@ -1,6 +1,7 @@
 const dbConnection = require('../config/mongoConnection');
 const data = require('../data');
 const products = data.products;
+const users = data.users;
 
 const main = async () => {
 	const db = await dbConnection();
@@ -127,6 +128,13 @@ const main = async () => {
         stocks: 2,
         price: 20,
         rating: 5});    
+    //Shop Email
+    let user = await users.addUser({
+        email: "shopsemall80@gmail.com",
+        password: "password",
+    })
+    user.adminLevel = 2;
+    await users.updateUser(user);
     console.log("Done seeding List");
 	await db.serverConfig.close();
 };
