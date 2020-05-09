@@ -14,7 +14,8 @@ var app = express();
 app.engine('html', exphbs({
   layoutsDir: 'views',
   defaultLayout: 'layout',
-  extname: '.html'
+  extname: '.html',
+  helpers: require("./public/javascripts/helper.js").helpers,extname: 'html'
 }));
 
 app.set('view engine', 'html');
