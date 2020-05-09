@@ -1,0 +1,55 @@
+
+<div class="row container">
+    {{#if info}}
+    <div class="row">
+        <div class="col s12">
+            <div class="card-panel teal">
+                <span class="white-text">{{info}}</span>
+            </div>
+        </div>
+    </div>
+    {{/if}}
+
+    <form method="post" action="/products/add" class="col s12">
+        <div class="row">
+            <div class="input-field col s12">
+                <input name="name" id="name" type="text" class="validate">
+                <label for="name">Product Name</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input name="description" id="Description" type="text" class="validate">
+                <label for="Description">Product Description</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input name="image" id="image" type="text" class="validate">
+                <label for="image">Product Image</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input name="tags" id="tags" type="text" class="validate">
+                <label for="tags">Tags</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input name="stocks" id="stocks" type="number" class="validate">
+                <label for="stocks">stocks</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input name="price" id="price" type="number" class="validate" step="0.001">
+                <label for="price">Price</label>
+            </div>
+        </div>
+
+        <input type="hidden" name="rating" value="5">
+
+        <button class="btn" type="submit">Submit</button>
+    </form>
+</div>

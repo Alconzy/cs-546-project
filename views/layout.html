@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/materialize.min.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <title>Emall</title>
+</head>
+<body>
+    <script src="/javascripts/jquery.min.js"></script>
+    <script src="/javascripts/materialize.min.js"></script>
+    <nav>
+        <div class="nav-wrapper container">
+            <a href="/" class="brand-logo left">Emall</a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="/products/category/woman">WOMAN</a></li>
+                <li><a href="/products/category/man">MAN</a></li>
+                <li><a href="/products/category/kids">KIDS</a></li>
+                <li><a href="/products/category/baby">BABY</a></li>
+                {{#if sess.user}}
+                <li><a title="Products Order" href="/products/orderPage">Orders</a></li>
+                <li><a title="Change information" href="/users/changeinfo">{{sess.user.email}}</a></li>
+                {{else}}
+                <li><a href="/login.html">LOGIN</a></li>
+                <li><a href="/register.html">REGISTER</a></li>
+                {{/if}}
+            </ul>
+        </div>
+    </nav>
+
+    {{{body}}}
+    <script src="/javascripts/materialboxed.js"></script>
+    <script src="/javascripts/cart.js"></script>
+</body>
+</html>
