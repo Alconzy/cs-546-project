@@ -1,7 +1,7 @@
 const mongoCollections = require('../config/mongoCollections');
 const products = mongoCollections.products;
 const uuid = require('uuid');
-
+//
 let exportedMethods = {
     async getAllProduct() {
         const productCollection = await products();
@@ -46,7 +46,7 @@ let exportedMethods = {
 		let list = await productCollection.find({name: eval("/" + keyword + "/i")});
 		return list.toArray();
 	},
-
+//above contributed by Hongfeng Ou
 	async productFilter(tag, filterData, color){
 		const productCollection = await products();
 		let where_Condition = {};
