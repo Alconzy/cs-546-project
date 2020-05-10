@@ -223,4 +223,13 @@ router.get("/Graph", async (req, res) => {
     }
 });
 
+
+router.get("/all", async (req, res) => {
+    try {
+         let products = await productData.getAllProduct();
+         res.json({ "product": products });
+     } catch (e) {
+        res.json({ "product": [] })
+    }
+});
 module.exports = router;

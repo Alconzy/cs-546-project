@@ -121,7 +121,7 @@ await products.addProduct({
         description: "Dark overalls.",
         image: "woman4.webp",
         tags: "woman",
-        stocks: 2,
+        stocks: 20,
         price: 20,
         rating: 5,
         color:"Blue",
@@ -131,9 +131,9 @@ await products.addProduct({
         description: "The clothes are very good, the clothes are not ordinary good!",
         image: "kid1.webp",
         tags: "kids",
-        stocks: "123",
-        price: "32",
-        rating: "5",
+        stocks: 123,
+        price: 32,
+        rating: 5,
         color: "Black",
         sellCount: 0});
 await products.addProduct({	     
@@ -141,9 +141,9 @@ await products.addProduct({
         description: "The clothes are very good, the clothes are not ordinary good!",
         image: "kid2.webp",
         tags: "kids",
-        stocks: "10",
-        price: "10",
-        rating: "5",
+        stocks: 10,
+        price: 10,
+        rating: 5,
         color: "Red",
         sellCount: 0});
 await products.addProduct({	       
@@ -151,9 +151,9 @@ await products.addProduct({
         description: "The clothes are very good, the clothes are not ordinary good!",
         image: "kid3.webp",
         tags: "kids",
-        stocks: "12",
-        price: "12",
-        rating: "5",
+        stocks: 12,
+        price: 12,
+        rating: 5,
         color: "Black",
         sellCount: 0});
 await products.addProduct({	         
@@ -161,9 +161,9 @@ await products.addProduct({
         description: "The clothes are very good, the clothes are not ordinary good!",
         image: "kid4.webp",
         tags: "kids",
-        stocks: "10",
-        price: "10",
-        rating: "5",
+        stocks: 10,
+        price: 10,
+        rating: 5,
         color: "Blue",
         sellCount: 0});
     //Shop Email
