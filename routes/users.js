@@ -89,10 +89,8 @@ router.post('/login', async (req, res) => {
 });
 
 router.get('/logout', async(req, res) => {
-	req.session.destroy();
-	res.render('', {
-		'info': 'Logged out!'
-	});
+	await req.session.destroy();
+	res.redirect('/');
 });
 
 router.get('/cart_number', async (req, res) => {
