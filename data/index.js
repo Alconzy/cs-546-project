@@ -1,4 +1,3 @@
-/**Hongfeng Ou */
 const usersData = require("./users");
 const commentsData = require("./comments");
 const productsData = require('./products');
