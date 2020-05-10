@@ -22,12 +22,6 @@ app.engine('html', exphbs({
 
 app.set('view engine', 'html');
 
-app.use(session({
-  secret: 'keyboard cat',
-  cookie: {},
-  resave: false,
-  saveUninitialized: false
-}));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
