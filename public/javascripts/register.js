@@ -11,7 +11,7 @@ $(function () {
             return;
         }
         let data = $("#form").serialize();
-
+        // avoid same email register for multiple account
         $.ajax({
             type: 'POST',
             dataType: 'json',
