@@ -27,6 +27,7 @@
     <div class="modal-content">
         <h4>Payment</h4>
         <p>Total: ${{money}}</p>
+
         <p><strong>Delivered on:&nbsp;</strong>
             <script> 
                 var del = new Date();
@@ -41,6 +42,14 @@
     </div>
 </div>
 
+{{#ifCond  orderCount }}
+
 <div class="container">
-    <button data-target="modal"  id="payment" class="btn red right waves-effect waves-light">Payment</button>
+    <button data-target="modal" id="payment" class="btn red right waves-effect waves-light">Payment</button>
 </div>
+{{else}}
+<div class="description">
+    <p> Sorry! Cart List is Empty.</p>
+</div>
+
+{{/ifCond }}
