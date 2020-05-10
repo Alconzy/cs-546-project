@@ -1,6 +1,3 @@
-/**
- * Hongfeng Ou
- */
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -22,22 +19,17 @@ app.engine('html', exphbs({
 
 app.set('view engine', 'html');
 
+app.use(session({
+  secret: 'keyboard cat',
+  cookie: {},
+  resave: false,
+  saveUninitialized: false
+}));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-// set session and cookie expire time 30 mins
-app.use(session({
-  secret: 'Af3aQad2lK',
-  cookie: {
-    httpOnly: true,
-    maxAge: 1800000
-  },
-  resave: false,
-  saveUninitialized: true,
-}));
 
 // login check handler
 app.all('/*', function (req, res, next) {
@@ -48,8 +40,7 @@ app.all('/*', function (req, res, next) {
     // filter rules
     if (url === '/' || url.search('category') != -1 || url.search('login') != -1
         || url.search('register') != -1 || url.search('search') != -1
-        || url.search('detail') != -1 || url.search('carouselList') != -1 ||
-        url.search('all') != -1 || url === '/users' || url === '/forgetpassword.html' || url.search('forgetpassword')) {
+        || url.search('detail') != -1 || url.search('forgetpassword') != -1 || url.search('update_new_passoword') != -1) {
       next();
     } else {
       res.redirect('/login.html')

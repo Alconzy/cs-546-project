@@ -1,4 +1,3 @@
-/**Hongfeng Ou */
 const express = require('express');
 const router = express.Router();
 const commentData = require('../data').comments;

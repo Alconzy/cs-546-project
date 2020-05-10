@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const data = require('../data');
 const usersData = data.users;
-
 const nodemailer = require('nodemailer');
 
 let transporter = nodemailer.createTransport({
@@ -15,6 +14,7 @@ let transporter = nodemailer.createTransport({
 
 router.post("/register", async (req, res) => {
 	try {
+
 		let user = req.body;
 		user = await usersData.addUser(user);
 		if (user == null) {
@@ -61,7 +61,6 @@ router.post("/change", async (req, res) => {
 		req.session.user.password = user.password;
 		req.session.user.paymentInfo = user.paymentInfo;
 		req.session.user.address = user.address;
-
 		req.session.user.fullName = user.fullName;
 		user = await usersData.updateUser(req.session.user);
 		res.redirect('/changeinfo');
@@ -96,10 +95,9 @@ router.get('/logout', async(req, res) => {
 	});
 });
 
-// router.get('/cart_number', async (req, res) => {
-// 	res.json({ 'num': req.session.user.cart.length });
-// });
-
+router.get('/cart_number', async (req, res) => {
+	res.json({ 'num': req.session.user.cart.length });
+});
 
 router.get('/forgetpassword/:id', async (req, res) => {
 	try {
@@ -116,7 +114,7 @@ router.post('/forgetpassword', async (req, res) => {
 	try {
 		console.log("inside")
 		if (req.body.email) {
-			let emailAddress = req.body.email.trim();
+			let emailAddress = req.body.email;
 			let data = await usersData.checkEmail(emailAddress);
 			console.log("inside")
 			if (data.msg) {
@@ -130,7 +128,7 @@ router.post('/forgetpassword', async (req, res) => {
 					subject: 'Reset Password Link',
 					text: `Hello ${typeof data.fullName == 'undefined' ? "User" : data.fullName},\n\nHere is the link to reset your password: http://${req.get('host')}/users/forgetpassword/${data.data._id}.\n\nIf you have any troubles, email shopsemall80@gmail.com.`
 				};
-				transporter.sendMail(mailOptions, (error, info) => {
+				transporter.sendMail(mailOptions, (error, info) => {``
 					if (error) {
 						return console.log(error.message);
 					}
@@ -152,7 +150,6 @@ router.post('/forgetpassword', async (req, res) => {
 router.post('/update_new_passoword', async (req, res) => {
 	try {
 		if (req.body.new_password) {
-
 			let email = req.body.email;
 			let new_password = req.body.new_password;
 			let updateData = await usersData.updateNewPassword(email, new_password);

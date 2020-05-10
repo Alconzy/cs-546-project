@@ -1,7 +1,6 @@
 const usersRoutes = require("./users");
 const productsRoutes = require("./products");
 const commentsRoutes = require('./comments');
-const adminRoutes = require('./admin');
 const data = require('../data');
 const productData = data.products;
 
@@ -14,7 +13,6 @@ const constructorMethod = app => {
   app.use("/users", usersRoutes);
   app.use("/products", productsRoutes);
   app.use("/comments", commentsRoutes);
-  app.use("/admin", adminRoutes);
 
   app.get("/*.html", async (req, res) => {
     let url = req.originalUrl;
