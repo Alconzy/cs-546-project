@@ -96,9 +96,9 @@ router.get('/logout', async(req, res) => {
 	});
 });
 
-router.get('/cart_number', async (req, res) => {
-	res.json({ 'num': req.session.user.cart.length });
-});
+// router.get('/cart_number', async (req, res) => {
+// 	res.json({ 'num': req.session.user.cart.length });
+// });
 
 
 router.get('/forgetpassword/:id', async (req, res) => {
