@@ -13,17 +13,21 @@
     <a class="carousel-item" href="/products/detail/{{this._id}}"><img src="images/{{this.image}}"></a>
     {{/each}}
 </div>
-
+<div class="container" >    
+    <button class="btn btn-info" id="lth">Price: low-high</button>
+    <button class="btn btn-info" id="htl">Price: high-low</button>
+</div>
 <div class="row container">
     {{#each products}}
         <div class="col s3">
-            <div class="card">
+            <div class="card" id="product">
                 <div class="card-image">
-                    <img class="materialboxed" src="images/{{this.image}}">
-                    <a title="Add to cart" data-id="{{this._id}}" class="addCart btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+                    <img class="materialboxed" src="images/{{this.image}}" id="img">
+                    <a title="Add to cart" data-id="{{this._id}}" class="addCart btn-floating halfway-fab waves-effect waves-light red" id="id"><i class="material-icons">add</i></a>
                 </div>
                 <div class="card-content index-card-content">
-                    <p><a href="/products/detail/{{this._id}}" class="red-text">{{this.name}}</a></p>
+                    <p><a href="/products/detail/{{this._id}}" class="red-text" id="name">{{this.name}}</a></p>
+                    <p id="price">{{this.price}}</p>
                 </div>
             </div>
         </div>

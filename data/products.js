@@ -45,6 +45,42 @@ let exportedMethods = {
 		const productCollection = await products();
 		let list = await productCollection.find({name: eval("/" + keyword + "/i")});
 		return list.toArray();
+	},
+
+	async productFilter(tag, filterData, color){
+		const productCollection = await products();
+		let where_Condition = {};
+		let sort = {}
+		if(tag ){
+			where_Condition = {tags : tag } 
+		}
+		if(color ){
+			where_Condition["color"] = {$in : color}
+		}
+		if(filterData == "HL") // High to Low
+		{
+			sort = { price : -1}
+		}else if(filterData == "LH"){ // Low to High Price
+			sort = { price : 1}
+		}
+		
+		let list = await productCollection.find( { $query: where_Condition, $orderby: sort } )
+		return list.toArray(); 
+	},
+	async productSellCount(id, count){
+		const productCollection = await products();
+
+		let updatedProduct = {
+			sellCount: count
+		};
+		const updateInfo = await productCollection.updateOne({ _id: id }, { $set: updatedProduct });
+		if (!updateInfo.matchedCount && !updateInfo.modifiedCount) throw 'Update failed';
+		return this.getProductById(id);
+	}, 
+	async productGraph(){
+		const productCollection = await products();
+		const productList = await productCollection.find({}).project({_id : 0, sellCount : 1, name : 1}).toArray();
+		return productList
 	}
 };
 
