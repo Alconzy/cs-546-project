@@ -1,26 +1,27 @@
 {
   "name": "emall",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
     "seed": "node ./task/seed.js"
   },
   "dependencies": {
-    "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
-    "express": "~4.16.1",
-    "express-handlebars": "^3.1.0",
+    "cookie-parser": "^1.4.5",
+    "debug": "^4.1.1",
+    "express": "^4.17.1",
+    "express-handlebars": "^4.0.4",
     "express-hbs": "^2.3.3",
-    "express-session": "^1.17.0",
+    "express-session": "^1.17.1",
     "hbs": "^4.1.1",
-    "http-errors": "~1.6.3",
-    "jquery": "^3.5.0",
+    "highcharts": "^8.1.0",
+    "http-errors": "^1.7.3",
+    "jquery": "^3.5.1",
     "materialize-css": "^1.0.0",
-    "mongodb": "^3.5.5",
-    "morgan": "^1.9.1",
+    "mongodb": "^3.5.7",
+    "morgan": "^1.10.0",
     "nodemailer": "^6.4.6",
     "url": "^0.11.0",
-    "uuid": "^7.0.2"
+    "uuid": "^8.0.0"
   }
 }
