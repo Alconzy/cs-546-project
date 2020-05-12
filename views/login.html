@@ -1,5 +1,15 @@
+{{#if info}}
 <div class="row">
-    <form id="form" class="col s12">
+    <div class="col s6 offset-s3">
+        <div class="card-panel teal">
+            <span class="white-text">{{info}}</span>
+        </div>
+    </div>
+</div>
+{{/if}}
+
+<div class="row">
+    <form method="post" action="/users/login" class="col s12">
         <div class="row">
             <div class="input-field col s6 offset-s3">
                 <i class="material-icons prefix">email</i>
@@ -17,10 +27,8 @@
         </div>
         <div class="row">
             <div class="input-field col s6 offset-s3">
-                <a id="submit" class="waves-effect waves-light btn">Login</a>
-            </div>
+                <button class="btn" type="submit">Login</button>
+            </div>    
         </div>
     </form>
 </div>
-
-<script src="/javascripts/login.js"></script>
