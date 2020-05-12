@@ -29,6 +29,7 @@ let exportedMethods = {
 			paymentInfo: '',
 			address: '',
 			cart: [],
+			adminLevel: 0,
 			_id: uuid.v4()
 		};
 
@@ -51,6 +52,7 @@ let exportedMethods = {
 			paymentInfo: user.paymentInfo,
 			address: user.address,
 			cart: user.cart,
+			adminLevel: user.adminLevel,
 		};
 		const updateInfo = await userCollection.updateOne({ _id: user._id }, { $set: updatedUser });
 		if (!updateInfo.matchedCount && !updateInfo.modifiedCount) throw 'Update failed';

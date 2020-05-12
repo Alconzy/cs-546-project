@@ -14,6 +14,7 @@ let transporter = nodemailer.createTransport({
 
 router.post("/register", async (req, res) => {
 	try {
+
 		let user = req.body;
 		user = await usersData.addUser(user);
 		if (user == null) {
@@ -60,7 +61,6 @@ router.post("/change", async (req, res) => {
 		req.session.user.password = user.password;
 		req.session.user.paymentInfo = user.paymentInfo;
 		req.session.user.address = user.address;
-
 		req.session.user.fullName = user.fullName;
 		user = await usersData.updateUser(req.session.user);
 		res.redirect('/changeinfo');
@@ -122,7 +122,6 @@ router.post('/forgetpassword', async (req, res) => {
 					'info': data.msg
 				});
 			} else {
-				
 				let mailOptions = {
 					from: 'shopsemall80@gmail.com',
 					to: emailAddress,

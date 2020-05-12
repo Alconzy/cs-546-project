@@ -3,7 +3,6 @@ $(function() {
     $('.modal').modal();
 
     $.get('/users/cart_number', function (data) {
-        console.log(data)
         if (data.num) {
             $('#cart-number').text(data.num);
         } else {
