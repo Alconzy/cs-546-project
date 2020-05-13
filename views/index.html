@@ -1,7 +1,7 @@
 <div class="container">
     <form action="/products/search" method="post">
         <div class="input-field">
-            <input name="searchKeyword" id="search" type="search" required>
+            <input name="searchKeyword" id="search" type="search" placeholder="Search for an item..." required>
             <label class="label-icon" for="search"><i class="material-icons">search</i></label>
             <i class="material-icons">close</i>
         </div>
@@ -12,8 +12,10 @@
 </div>
 
 <div class="container" >
+  <div class = "row">
     <button class="btn btn-info" id="lth">Price: low-high</button>
     <button class="btn btn-info" id="htl">Price: high-low</button>
+  </div>
 </div>
 <div class="row container" id="products">
 </div>
