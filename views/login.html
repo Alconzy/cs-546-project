@@ -9,7 +9,15 @@
 {{/if}}
 
 <div class="row">
-    <form method="post" action="/users/login" class="col s12">
+    <form method="post" id="loginForm" class="col s12">
+        <div class="row" id="login-failed">
+            <div class="col s6 offset-s3">
+                <div class="card-panel teal">
+                    <span class="white-text"></span>
+                </div>
+            </div>
+
+        </div>
         <div class="row">
             <div class="input-field col s6 offset-s3">
                 <i class="material-icons prefix">email</i>
@@ -22,13 +30,13 @@
                 <i class="material-icons prefix">vpn_key</i>
                 <input name="password" id="password" type="password" class="validate">
                 <label for="password">Password</label>
-                <a href="/forgetpassword.html" ><u>forget password?</u></a>
+                <a href="/forgetpassword.html"><u>forget password?</u></a>
             </div>
         </div>
         <div class="row">
             <div class="input-field col s6 offset-s3">
                 <button class="btn" type="submit">Login</button>
-            </div>    
+            </div>
         </div>
     </form>
 </div>

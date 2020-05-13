@@ -77,10 +77,11 @@ router.post('/login', async (req, res) => {
 		let user = await usersData.userLogin(email, password);
 		if (user.length === 1) {
 			req.session.user = user[0];
-			res.redirect('/');
+			res.json({success : true , user : user});
 		} else {
-			res.render('login', {
-				'info': 'Wrong username or password'
+			res.json({
+				success:   false,
+				message: "Invalid Credential. Please try again!"
 			});
 		}
 	} catch (e) {
