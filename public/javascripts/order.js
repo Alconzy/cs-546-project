@@ -23,7 +23,7 @@ $(function () {
                         </div>
                         <div class="card-stacked">
                             <div class="card-content">
-                                <p><strong><a href="/products/detail/{this._id}">${val.name}</a></strong></p>
+                                <p><strong><a href="/products/detail/${val._id}">${val.name}</a></strong></p>
                                 <p><strong>Price: $${val.price}</strong></p>
                             </div>
                             <div class="card-action">
