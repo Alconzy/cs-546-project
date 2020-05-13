@@ -135,18 +135,22 @@ router.get("/orderProduct", async (req, res) => {
 
 // order and then clear cart
 router.get("/order", async (req, res) => {
-    // update order history
-    let order = req.session.user.orderHistory.concat(req.session.user.cart);
-    req.session.user.orderHistory = order;
-    await userData.updateUser(req.session.user);
-
+  
     // descent the stocks
     for (let i = 0; i < req.session.user.cart.length; i++) {
         let id = req.session.user.cart[i];
         let product = await productData.getProductById(id);
         await productData.updateProductStockRemaining(id, Number.parseInt(product.stocks) - 1);
+        await productData.productSellCount(id, Number.parseInt(product.sellCount) + 1);
     }
-    req.session.user.cart = [];
+
+    
+        // update order history
+        let order = req.session.user.orderHistory.concat(req.session.user.cart);
+        req.session.user.orderHistory = order;
+        req.session.user.cart = [];
+        await userData.updateUser(req.session.user);
+        req.session.user.cart = [];
 
     // find all products in order history
     let products = [];
@@ -202,13 +206,12 @@ router.get("/Graph", async (req, res) => {
                 x: element.name,
                 y: element.sellCount
             })
-        });
+        })
         res.json({ "product": product_data })
     } catch (e) {
         res.json({ "product": [] })
     }
 });
-
 // random sort the array
 function randomSort(a, b) {
     return Math.random()>.5 ? -1 : 1;
