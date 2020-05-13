@@ -8,11 +8,11 @@
     <link rel="stylesheet" href="/stylesheets/style.css">
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"> </script>
     <script src="https://code.jscharting.com/2.9.0/jscharting.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
     <title>Emall</title>
 </head>
 <body>
-    <script src="/javascripts/jquery.min.js"></script>
-    <script src="/javascripts/materialize.min.js"></script>
     <nav>
         <div class="nav-wrapper container">
             <a href="/" class="brand-logo left">Emall</a>
@@ -24,6 +24,7 @@
                 {{#if sess.user}}
                 <li><a title="Products Order" href="/products/orderPage">Orders</a></li>
                 <li><a title="Change information" href="/users/changeinfo">{{sess.user.email}}</a></li>
+                <li><a title="Logout" href="/users/logout">Logout</a></li>
                 {{else}}
                 <li><a href="/login.html">LOGIN</a></li>
                 <li><a href="/register.html">REGISTER</a></li>
@@ -37,6 +38,6 @@
     {{{body}}}
     <script src="/javascripts/materialboxed.js"></script>
     <script src="/javascripts/cart.js"></script>
-    <script src="/javascripts/login.js"></script>
+    <script src="/javascripts/sort.js"></script>
 </body>
 </html>

@@ -16,38 +16,37 @@ router.post("/add", async (req, res) => {
     }
 });
 
-// find the product by id
 router.get("/detail/:id", async (req, res) => {
+    res.render('detail');
+});
 
-     try {
-        let id = req.params.id;
-        let product = await productData.getProductById(id);
-        let comments = await commentData.getCommentByProduct(id);
-        res.render('detail', {
-            'product': product,
-            'comments': comments
-        });
-    } catch (e) {
-        res.status(400).json({ "err": 1, "msg": e.message });
-    }
+// find the product by id
+router.get("/detail/product/:id", async (req, res) => {
+    let id = req.params.id;
+    let product = await productData.getProductById(id);
+    res.json(product);
+});
+
+router.get("/detail/comments/:id", async (req, res) => {
+    let id = req.params.id;
+    let comments = await commentData.getCommentByProduct(id);
+    res.json(comments);
 });
 
 // filter product
 router.get("/category/:class", async (req, res) => {
+    res.render('category');
+});
 
-    try {
-        let category = req.params.class;
-        let products = await productData.getAllProduct();
-        products = products.filter(function (product) {
-            return product.tags === category;
-        });
+// filter product
+router.get("/category_list/:class", async (req, res) => {
+    let category = req.params.class;
+    let products = await productData.getAllProduct();
+    products = products.filter(function (product) {
+        return product.tags === category;
+    });
 
-        res.render('category', {
-            "products": products
-        });
-    } catch (e) {
-        res.status(400).json({ "err": 1, "msg": e.message });
-    }
+    res.json({"products": products});
 });
 
 // search product
@@ -121,74 +120,61 @@ router.get("/payment/:money", async (req, res) => {
 
 // return order page
 router.get("/orderPage", async (req, res) => {
-    
-    try {
-        let products = [];
-        for (let i = 0; i < req.session.user.orderHistory.length; i++) {
-            let id = req.session.user.orderHistory[i];
-            let product = await productData.getProductById(id);
-            products.push(product);
-        }
-        res.render('order', {
-            'products': products
-        });
-    } catch (e) {
-        res.status(400).json({ "err": 1, "msg": e.message });
+    res.render('order');
+});
+
+router.get("/orderProduct", async (req, res) => {
+    let products = [];
+    for (let i = 0; i < req.session.user.orderHistory.length; i++) {
+        let id = req.session.user.orderHistory[i];
+        let product = await productData.getProductById(id);
+        products.push(product);
     }
+    res.json(products);
 });
 
 // order and then clear cart
 router.get("/order", async (req, res) => {
-    try {
+    // update order history
+    let order = req.session.user.orderHistory.concat(req.session.user.cart);
+    req.session.user.orderHistory = order;
+    await userData.updateUser(req.session.user);
 
-        // descent the stocks
-        for (let i = 0; i < req.session.user.cart.length; i++) {
-            let id = req.session.user.cart[i];
-            let product = await productData.getProductById(id);
-            await productData.updateProductStockRemaining(id, Number.parseInt(product.stocks) - 1);
-            await productData.productSellCount(id, Number.parseInt(product.sellCount) + 1);
-        }
-
-        // update order history
-        let order = req.session.user.orderHistory.concat(req.session.user.cart);
-        req.session.user.orderHistory = order;
-        req.session.user.cart = [];
-        await userData.updateUser(req.session.user);
-
-        // find all products in order history
-        let products = [];
-        for (let i = 0; i < req.session.user.orderHistory.length; i++) {
-            let id = req.session.user.orderHistory[i];
-            let product = await productData.getProductById(id);
-            products.push(product);
-        }
-
-        res.render('order', {
-            'products': products
-        });
-    } catch (e) {
-        res.status(400).json({ "err": 1, "msg": e.message });
+    // descent the stocks
+    for (let i = 0; i < req.session.user.cart.length; i++) {
+        let id = req.session.user.cart[i];
+        let product = await productData.getProductById(id);
+        await productData.updateProductStockRemaining(id, Number.parseInt(product.stocks) - 1);
     }
+    req.session.user.cart = [];
+
+    // find all products in order history
+    let products = [];
+    for (let i = 0; i < req.session.user.orderHistory.length; i++) {
+        let id = req.session.user.orderHistory[i];
+        let product = await productData.getProductById(id);
+        products.push(product);
+    }
+
+    res.render('order', {
+        'products': products
+    });
 });
 
 router.get("/order/delete/:id", async (req, res) => {
-    try {
-        let id = req.params.id;
-        let order = req.session.user.orderHistory;
-        let index = order.indexOf(id);
-        req.session.user.orderHistory.splice(index, 1);
-        await userData.updateUser(req.session.user);
-        res.redirect('/products/order');
-    } catch (e) {
-        res.status(400).json({ "err": 1, "msg": e.message });
-    }
+    let id = req.params.id;
+    let order = req.session.user.orderHistory;
+    let index = order.indexOf(id);
+    req.session.user.orderHistory.splice(index, 1);
+    await userData.updateUser(req.session.user);
+    res.redirect('/products/order');
 });
 
 // filter by high to low / low to high price and color 
 router.post("/productFilter", async (req, res) => {
     try {
         // req.body.color  Should be array
-        let product = await productData.productFilter(req.body.tag, req.body.filter, req.body.color)
+        let product = await productData.productFilter(req.body.tag, req.body.filter, req.body.color);
         res.render('category', {
             "products": product
         });
@@ -216,13 +202,25 @@ router.get("/Graph", async (req, res) => {
                 x: element.name,
                 y: element.sellCount
             })
-        })
+        });
         res.json({ "product": product_data })
     } catch (e) {
         res.json({ "product": [] })
     }
 });
 
+// random sort the array
+function randomSort(a, b) {
+    return Math.random()>.5 ? -1 : 1;
+}
+
+router.get('/carouselList', async (req, res) => {
+    let products = await productData.getAllProduct();
+    products = products.sort(randomSort);
+
+    let carouselList = products.splice(0, 5);
+    res.json({"carouselList": carouselList});
+});
 
 router.get("/all", async (req, res) => {
     try {

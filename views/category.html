@@ -11,21 +11,8 @@
     <button class="btn btn-info" id="lth">Price: low-high</button>
     <button class="btn btn-info" id="htl">Price: high-low</button>
 </div>
-<div class="row container">
-    {{#each products}}
-    <div class="col s3">
-        <div class="card" id="product">
-            <div class="card-image">
-                <img class="materialboxed" src="/images/{{this.image}}" id="img">
-                <a title="Add to cart" data-id="{{this._id}}" class="addCart btn-floating halfway-fab waves-effect waves-light red" id="id"><i class="material-icons">add</i></a>
-            </div>
-            <div class="card-content index-card-content">
-                <p><a href="/products/detail/{{this._id}}" class="red-text" id="name">{{this.name}}</a></p>
-                <p id="price">{{this.price}}</p>
-            </div>
-        </div>
-    </div>
-    {{/each}}
+
+<div id="products" class="row container">
 </div>
 
 <!-- float button -->
@@ -39,4 +26,4 @@
         <i class="large material-icons">shopping_cart</i></a>
     </a>
 </div>
-<script src="/javascripts/index.js"></script>
+<script src="/javascripts/category.js"></script>

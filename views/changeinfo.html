@@ -1,21 +1,4 @@
-{{#if info}}
-<div class="row">
-    <div class="col s6 offset-s3">
-        <div class="card-panel teal">
-          <span class="white-text">{{info}}</span>
-        </div>
-    </div>
-</div>
-{{/if}}
-
-<form method="post" action="/users/change" class="col s12">
-    <div class="row">
-        <div class="input-field col s6 offset-s3">
-            <i class="material-icons prefix">person</i>
-            <input name="fullName" id="fullName" type="text" class="validate" value="{{user.fullName}}">
-            <label for="fullName">Full Name</label>
-        </div>
-    </div>
+<form id="form" class="col s12">
     <div class="row">
         <div class="input-field col s6 offset-s3">
             <i class="material-icons prefix">email</i>
@@ -46,10 +29,8 @@
     </div>
     <div class="row">
         <div class="input-field col s6 offset-s3">
-            <button class="btn" type="submit">Submit</button>
+            <a id="submit" class="waves-effect waves-light btn">Submit</a>
         </div>
-        <div class="input-field col s6 offset-s3" >
-            <a class="logOut btn-floating halfway-fab waves-effect waves-light red" href="/" ><i class="material-icons" >power_settings_new</i></a>
-        </div>    
     </div>
 </form>
+<script src="/javascripts/changeinfo.js"></script>

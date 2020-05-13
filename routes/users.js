@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const data = require('../data');
+var xss = require("xss");
 const usersData = data.users;
 const nodemailer = require('nodemailer');
 
@@ -15,17 +16,23 @@ let transporter = nodemailer.createTransport({
 router.post("/register", async (req, res) => {
 	try {
 		let user = req.body;
+
+		let email = xss(user.email);
+		let password = xss(user.password);
+
+		user.email = email.toLowerCase();
+
+		// check form
+		if (email.length === 0 || password.length === 0) {
+			res.json({"info": "error"});
+			return;
+		}
+
 		user = await usersData.addUser(user);
 		if (user == null) {
-			res.render('register', {
-				'info': 'The mail has been registered'
-			})
+			res.json({"info": "error"});
 		} else {
-			req.session.user = user;
-			res.render('changeinfo', {
-				'user': user,
-				'info': 'Please improve your personal information'
-			});
+			res.json({"info": "success"});
 		}
 	} catch (e) {
 		res.status(400).json({ "err": 1, "msg": e.message });
@@ -55,45 +62,56 @@ router.get("/changeinfo", async (req, res) => {
 });
 
 router.post("/change", async (req, res) => {
-	try {
-		let user = req.body;
-		req.session.user.password = user.password;
-		req.session.user.paymentInfo = user.paymentInfo;
-		req.session.user.address = user.address;
+	let user = req.body;
+	// check form
+	let password = user.password;
+	let payment = user.paymentInfo;
+	let address = user.address;
 
-		req.session.user.fullName = user.fullName;
-		user = await usersData.updateUser(req.session.user);
-		res.redirect('/changeinfo');
-	} catch (e) {
-		res.status(400).json({ "err": 1, "msg": e.message });
+	if (password.length === 0 || payment.length === 0 || address.length === 0) {
+		res.json({'info': 'error'});
+		return;
 	}
+
+	req.session.user.password = xss(user.password);
+	req.session.user.paymentInfo = xss(user.paymentInfo);
+	req.session.user.address = xss(user.address);
+
+	user = await usersData.updateUser(req.session.user);
+
+	res.json({'info': 'success'});
 });
 
 // login
 router.post('/login', async (req, res) => {
 	try {
-		let email = req.body.email;
-		let password = req.body.password;
+		let email = xss(req.body.email);
+		let password = xss(req.body.password);
+
+		email = email.toLowerCase();
+
+		// check form
+		if (email.length === 0 || password.length === 0) {
+			res.json({"info": "error"});
+			return;
+		}
+
 		let user = await usersData.userLogin(email, password);
+
 		if (user.length === 1) {
 			req.session.user = user[0];
-			res.json({success : true , user : user});
+			res.json({"info": "success"});
 		} else {
-			res.json({
-				success:   false,
-				message: "Invalid Credential. Please try again!"
-			});
+			res.json({"info": "error"});
 		}
 	} catch (e) {
 		res.status(400).json({ "err": 1, "msg": e.message });
 	}
 });
 
-router.get('/logout', async(req, res) => {
-	req.session.destroy();
-	res.render('', {
-		'info': 'Logged out!'
-	});
+router.get('/logout', async (req, res) => {
+	delete req.session.user;
+	res.redirect('/');
 });
 
 router.get('/cart_number', async (req, res) => {
@@ -113,11 +131,10 @@ router.get('/forgetpassword/:id', async (req, res) => {
 
 router.post('/forgetpassword', async (req, res) => {
 	try {
-		console.log("inside")
 		if (req.body.email) {
 			let emailAddress = req.body.email;
 			let data = await usersData.checkEmail(emailAddress);
-			console.log("inside")
+			console.log("inside");
 			if (data.msg) {
 				res.render('login', {
 					'info': data.msg

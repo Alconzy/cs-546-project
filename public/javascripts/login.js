@@ -1,22 +1,29 @@
+$(function () {
+    // Ajax submit form
+    $("#submit").click(function () {
+        // check form data
+        let email = $.trim($('#email').val());
+        let password = $.trim($('#password').val());
 
-$(function(){
+        // not none
+        if (email.length === 0 || password.length === 0) {
+            Materialize.toast('Email or password is empty!', 2000);
+            return;
+        }
+        let data = $("#form").serialize();
 
-    $('#login-failed').hide();
-
-    $( "#loginForm" ).submit(function( event ) {
-        event.preventDefault();
-        $.post( "/users/login", $('#loginForm').serialize())
-            .done(function(data) {
-                if(data.success){
-                    window.location.href = "/";
-                } else {
-                    $("#login-failed span").text(data.message);
-                    $("#login-failed").show()
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            data: data,
+            url: '/users/login',
+            success: function(data) {
+                if (data.info === "success") {
+                    location = '/';
+                } else if (data.info === "error") {
+                    Materialize.toast('Wrong username or password!', 2000);
                 }
-            })
-            .fail(function() {
-                $("#login-failed span").text("Something went Wrong!");
-                $("#login-failed").show()
-            })
+            }
+        })
     });
 });

@@ -1,87 +1,50 @@
 $(document).ready(function () {
-    $('.carousel').carousel({ full_width: true });
+	// require the carousel products
+	$.get('/products/carouselList', function (data) {
+		data.carouselList.forEach(function (val, index, arr) {
+			$('#carousel').append(`<a class="carousel-item" href="/products/detail/${val._id}"><img src="images/${val.image}"></a>`);
+		});
+		$('.carousel').carousel({full_width: true});
+	});
+
+	// require all products
+	$.get('/products/all', function (data) {
+		data.product.forEach(function (val, index, arr) {
+			$('#products').append(`
+            <div class="col s3">
+                <div class="card product">
+                    <div class="card-image">
+                        <img id="img" class="materialboxed" src="images/${val.image}">
+                        <a id="id" title="Add to cart" data-id="${val._id}" class="addCart btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+                    </div>
+                    <div class="card-content index-card-content">
+                        <p><a id="name" href="/products/detail/${val._id}" class="red-text">${val.name}</a></p>
+                        <p id="price">${val.price}</p>
+                    </div>
+                </div>
+            </div>
+            `);
+		});
+		$('.materialboxed').materialbox();
+
+		$('.addCart').click(function () {
+			let id = $(this).attr('data-id');
+			// add cart
+			$.post('/users/add_cart', {
+				'id': id
+			}, function (data) {
+				if (data.length > 50) {
+					location = '/login.html';
+				} else {
+					$.get('/users/cart_number', function (data) {
+						if (data.num) {
+							$('#cart-number').text(data.num);
+						} else {
+							$('#cart-number').text(0);
+						}
+					});
+				}
+			});
+		});
+	});
 });
-
-var sort_1 = document.getElementById("lth");
-sort_1.addEventListener("click", sort_lth);
-
-var sort_2 = document.getElementById("htl");
-sort_2.addEventListener("click", sort_htl);
-
-function sort_lth() {
-	console.log("LTH");
-	var arr = [];
-	var products = document.querySelectorAll("#product");
-	for(i=0;i<products.length;i++)
-	{  
-        let obj = {};
-		obj.name = products[i].querySelector("#name").innerHTML;
-		obj.price = products[i].querySelector("#price").innerHTML;
-		obj.id = products[i].querySelector("#id").getAttribute('data-id');
-		obj.img = products[i].querySelector("#img").src;
-		obj.tag = products[i].querySelector("#name").href;
-		arr.push(obj);
-	}
-	arr.sort(compare);
-	console.log(arr);
-	arr.forEach((product,index) => {
-		products[index].querySelector("#name").innerHTML = product.name;
-		products[index].querySelector("#price").innerHTML = product.price;
-		products[index].querySelector("#id").setAttribute('data-id',product.id);
-		products[index].querySelector("#img").src = product.img;
-		products[index].querySelector("#name").href = product.tag;
-	});
-}
-
-function compare(a,b) {
-	const A = parseInt(a.price);
-	const B = parseInt(b.price);
-
-	let comparison = 0;
-	if (A > B) {
-	    comparison = 1;
-	} else if (A < B) {
-	    comparison = -1;
-	}
-	return comparison;
-	
-}
-
-function compare_reverse(a,b) {
-	const A = parseInt(a.price);
-	const B = parseInt(b.price);
-
-	let comparison = 0;
-	if (A > B) {
-	    comparison = 1;
-	} else if (A < B) {
-	    comparison = -1;
-	}
-	return comparison*-1;
-	
-}
-
-function sort_htl() {
-	console.log("HTL");
-	var arr = [];
-	var products = document.querySelectorAll("#product");
-	for(i=0;i<products.length;i++)
-	{  
-        let obj = {};
-		obj.name = products[i].querySelector("#name").innerHTML;
-		obj.price = products[i].querySelector("#price").innerHTML;
-		obj.id = products[i].querySelector("#id").getAttribute('data-id');
-		obj.img = products[i].querySelector("#img").src;
-		obj.tag = products[i].querySelector("#name").href;
-		arr.push(obj);
-	}
-	arr.sort(compare_reverse);
-	console.log(arr);
-	arr.forEach((product,index) => {
-		products[index].querySelector("#name").innerHTML = product.name;
-		products[index].querySelector("#price").innerHTML = product.price;
-		products[index].querySelector("#id").setAttribute('data-id',product.id);
-		products[index].querySelector("#img").src = product.img;
-		products[index].querySelector("#name").href = product.tag;
-	});
-}

@@ -1,58 +1,32 @@
 <div class="col s12 container">
-    <div class="card horizontal">
-        <div class="card-image">
-            <img class="materialboxed" src="/images/{{product.image}}">
-        </div>
-        <div class="card-stacked">
-            <div class="card-content">
-                <h5 class="red-text">{{product.name}}</h5>
-                <p><strong>Price: ${{product.price}}</strong></p>
-                <p><strong>Stock: {{product.stocks}}</strong></p>
-                <p>{{product.description}}</p>
-            </div>
-            <div class="card-action">
-                <a data-id="{{product._id}}" title="Add to cart" class="addCart waves-effect waves-light btn red"><i
-                        class="large material-icons">shopping_cart</i></a>
-                <a id="add_comment" title="Add comment" class="waves-effect waves-light btn"><i
-                        class="large material-icons">comment</i></a>
-            </div>
-        </div>
+    <div id="detail" class="card horizontal">
+
     </div>
 </div>
 
 <div id="modal" class="modal">
     <form action="/comments/add" method="post">
-    <div class="modal-content">
-        <h6>Add Comment</h6>
-        <div class="input-field col s12">
-            <textarea name="comment" id="comment" class="materialize-textarea"></textarea>
-            <label for="comment">Add Comment</label>
+        <div class="modal-content">
+            <h6>Add Comment</h6>
+            <div class="input-field col s12">
+                <textarea name="comment" id="comment" class="materialize-textarea"></textarea>
+                <label for="comment">Add Comment</label>
+            </div>
+            <div class="input-field col s12">
+                <input name="rating" id="rating" class="validate" type="number" min="0" max="5" step="1" />
+                <label for="rating">Rating</label>
+            </div>
+            <input name="product" type="hidden" id="product"/>
         </div>
-        <div class="input-field col s12">
-            <input name="rating" id="rating" class="validate" type="number" min="0" max="5" step="1" />
-            <label for="rating">Rating</label>
+        <div class="modal-footer">
+            <button id="add" href="#!" class="modal-action waves-effect waves-green btn-flat">Add</button>
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
         </div>
-        <input name="product" type="hidden" id="product" value="{{product._id}}"/>
-    </div>
-    <div class="modal-footer">
-        <button id="add" href="#!" class="modal-action waves-effect waves-green btn-flat">Add</button>
-        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
-    </div>
     </form>
 </div>
 
 <!-- comment -->
-<ul class="collection container with-header">
-    <li class="collection-header"><h5>Comments</h5></li>
-    {{#each comments}}
-    <li class="collection-item avatar">
-        <img src="/images/avatar.jpg" alt="avatar" class="circle">
-        <p><strong>{{this.name}}</strong></p>
-        <p><strong>Rating: {{this.rating}}</strong></p>
-        <p>{{this.comment}}</p>
-    </li>
-    {{/each}}
-</ul>
+<ul id="comment_container" class="collection container with-header"></ul>
 
 <!-- float button -->
 <div class="fixed-action-btn">
