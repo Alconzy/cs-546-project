@@ -59,7 +59,7 @@ $(function () {
         comments.forEach(function (val, index, array) {
             comment.append(`
             <li class="collection-item avatar">
-                <img src="/images/avatar.jpg" alt="avatar" class="circle">
+                <img src="/images/avatar.jpg" role="presentation" alt="avatar" class="circle">
                 <p><strong>${val.name}</strong></p>
                 <p><strong>Rating: ${val.rating}</strong></p>
                 <p>${val.comment}</p>

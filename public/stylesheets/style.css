@@ -17,12 +17,12 @@ body {
   right: 0;
   width: 30px;
   height: 30px;
-  background-color: red;
+  background-color: #ee0000;
   border-radius: 50%;
   z-index: 100;
   text-align: center;
   line-height: 30px;
-  color: white;
+  color:#ffffff;
   user-select: none;
   font-size: 12px;
   font-weight: bold;
@@ -45,7 +45,7 @@ nav {
 
 nav {
   color: #fff;
-  background-color: #ee6e73;
+  background-color: #de333e;
   width: 100%;
   height: 56px;
   line-height: 56px;

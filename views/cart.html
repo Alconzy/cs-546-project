@@ -1,12 +1,14 @@
+<!DOCTYPE html>
 <ul class="collection with-header container">
     <li class="collection-header">
         <h4>Cart</h4>
     </li>
+</ul>
     {{#each products}}
     <div class="col s12 m7">
         <div class="mycard card horizontal">
             <div class="card-image">
-                <img src="/images/{{this.image}}">
+                <img src="/images/{{this.image}}" alt = "role">
             </div>
             <div class="card-stacked">
                 <div class="card-content">
@@ -19,8 +21,10 @@
             </div>
         </div>
     </div>
-    {{/each}}
-</ul>
+        {{/each}}
+    
+    
+
 
 <!-- model -->
 <div id="modal" class="modal">
@@ -37,7 +41,7 @@
         </p>
     </div>
     <div class="modal-footer">
-        <a href="/products/payment/{{money}}" class=" modal-action waves-effect waves-green btn-flat">Go Payment</a>
+        <a href="/products/payment" class=" modal-action waves-effect waves-green btn-flat">Go Payment</a>
         <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
     </div>
 </div>
