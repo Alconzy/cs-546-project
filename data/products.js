@@ -19,6 +19,8 @@ let exportedMethods = {
 			stocks: product.stocks,
 			price: product.price,
 			rating: product.rating,
+			sellCount : product.sellCount,
+			color : product.color,
 			_id: uuid.v4()
 		};
 
