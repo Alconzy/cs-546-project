@@ -28,6 +28,19 @@ router.post("/register", async (req, res) => {
 			return;
 		}
 
+    let mailOptions = {
+      from: 'shopsemall80@gmail.com',
+      to: email,
+      subject: 'Thank you for registering with Emall!',
+      text: `Hello,\n\nThis email serves as confirmation that you have registered with Emall!\n\nIf you have any questions, email shopsemall80@gmail.com.\n\nThank you!`
+    };
+    transporter.sendMail(mailOptions, (error, info) => {``
+      if (error) {
+        return console.log(error.message);
+      }
+      console.log('Email sent: ' + info.response);
+    });
+
 		user = await usersData.addUser(user);
 		if (user == null) {
 			res.json({"info": "error"});
@@ -123,7 +136,7 @@ router.get('/forgetpassword/:id', async (req, res) => {
 		let data = await usersData.getUserById(req.params.id);
 		res.render('forgetpassword', {
 			'email_info': data.email
-		}); 
+		});
 	} catch (e) {
 		res.json({ "err": 1, "msg": "Please enter valid ID." });
 	}
@@ -140,7 +153,7 @@ router.post('/forgetpassword', async (req, res) => {
 					'info': data.msg
 				});
 			} else {
-				
+
 				let mailOptions = {
 					from: 'shopsemall80@gmail.com',
 					to: emailAddress,
@@ -152,7 +165,7 @@ router.post('/forgetpassword', async (req, res) => {
 						return console.log(error.message);
 					}
 					console.log('Email sent: ' + info.response);
-				});				
+				});
 				res.render('login', {
 						'info': "Email Sent"
 				});
