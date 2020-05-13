@@ -64,16 +64,15 @@ router.get("/changeinfo", async (req, res) => {
 router.post("/change", async (req, res) => {
 	let user = req.body;
 	// check form
-	let fullName = user.fullName;
 	let password = user.password;
 	let payment = user.paymentInfo;
 	let address = user.address;
 
-	if (fullName.length === 0 || password.length === 0 || payment.length === 0 || address.length === 0) {
+	if (password.length === 0 || payment.length === 0 || address.length === 0) {
 		res.json({'info': 'error'});
 		return;
 	}
-	req.session.user.fullName = xss(user.fullName);
+
 	req.session.user.password = xss(user.password);
 	req.session.user.paymentInfo = xss(user.paymentInfo);
 	req.session.user.address = xss(user.address);
