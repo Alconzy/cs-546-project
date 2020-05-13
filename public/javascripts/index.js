@@ -2,7 +2,7 @@ $(document).ready(function () {
 	// require the carousel products
 	$.get('/products/carouselList', function (data) {
 		data.carouselList.forEach(function (val, index, arr) {
-			$('#carousel').append(`<a class="carousel-item" href="/products/detail/${val._id}"><img src="images/${val.image}" role="presentation"></a>`);
+			$('#carousel').append(`<a class="carousel-item" href="/products/detail/${val._id}"><img src="images/${val.image}"></a>`);
 		});
 		$('.carousel').carousel({full_width: true});
 	});
