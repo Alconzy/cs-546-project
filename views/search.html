@@ -1,0 +1,43 @@
+<div class="container">
+    <form action="/products/search" method="post">
+        <div class="input-field">
+            <input name="searchKeyword" id="search" type="search" required>
+            <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+            <i class="material-icons">close</i>
+        </div>
+    </form>
+</div>
+<div class="container" >
+    <button class="btn btn-info" id="lth">Price: low-high</button>
+    <button class="btn btn-info" id="htl">Price: high-low</button>
+</div>
+
+<div class="row container">
+    {{#each products}}
+    <div class="col s3">
+        <div class="card product">
+            <div class="card-image">
+                <img id="img" class="materialboxed" src="/images/{{this.image}}">
+                <a id="id" title="Add to cart" data-id="{{this._id}}" class="addCart btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+            </div>
+            <div class="card-content index-card-content">
+                <p><a id="name" href="/products/detail/{{this._id}}" class="red-text">{{this.name}}</a></p>
+                <p id="price">{{this.price}}</p>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</div>
+
+<!-- float button -->
+<div class="fixed-action-btn">
+    {{#if sess.user}}
+    <span id="cart-number" class="bubble">{{sess.user.cart.length}}</span>
+    {{else}}
+    <span id="cart-number" class="bubble">0</span>
+    {{/if}}
+    <a href="/products/cart" class="btn-floating btn-large red">
+        <i class="large material-icons">shopping_cart</i></a>
+    </a>
+</div>
+<script src="/javascripts/search.js"></script>

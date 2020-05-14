@@ -56,7 +56,7 @@ router.post("/search", async (req, res) => {
         let searchKeyword = req.body.searchKeyword;
         let products = await productData.searchProducts(searchKeyword);
         console.log(products);
-        res.render('category', {
+        res.render('search', {
             "products": products
         });
     } catch (e) {
@@ -110,8 +110,14 @@ router.get("/payment/:money", async (req, res) => {
     
     try {
         let money = req.params.money;
+        let paymentInfo = req.session.user.paymentInfo;
+        let payment = false;
+        if (paymentInfo.length > 0) {
+            payment = true
+        }
         res.render('payment', {
-            'money': money
+            'money': money,
+            'payment': payment
         });
     } catch (e) {
         res.status(400).json({ "err": 1, "msg": e.message });
