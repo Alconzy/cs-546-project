@@ -150,7 +150,7 @@ router.get("/order", async (req, res) => {
     for (let i = 0; i < req.session.user.cart.length; i++) {
         let id = req.session.user.cart[i];
         let product = await productData.getProductById(id);
-        await productData.updateProductStockRemaining(id, Number.parseInt(product.stocks) - 1);
+        await productData.updateProductStockRemaining(id, Number.parseInt(product.stocks) - 1, Number.parseInt(product.sellCount) + 1);
     }
     req.session.user.cart = [];
 
@@ -191,7 +191,6 @@ router.post("/productFilter", async (req, res) => {
 
 router.get("/productGraph", async (req, res) => {
     try {
-        let product = await productData.productGraph()
         res.render('productGraph')
     } catch (e) {
         res.status(400).json({ "err": 1, "msg": e.message });

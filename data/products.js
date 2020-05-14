@@ -19,6 +19,7 @@ let exportedMethods = {
 			stocks: product.stocks,
 			price: product.price,
 			rating: product.rating,
+			sellCount: product.sellCount,
 			_id: uuid.v4()
 		};
 
@@ -31,11 +32,12 @@ let exportedMethods = {
 		const product = await productCollection.findOne({ _id: id });
 		return product;
 	},
-	async updateProductStockRemaining(id, quantity) {
+	async updateProductStockRemaining(id, quantity, sellCount) {
 		const productCollection = await products();
 
 		let updatedProduct = {
-			stocks: quantity
+			stocks: quantity,
+			sellCount: sellCount
 		};
 		const updateInfo = await productCollection.updateOne({ _id: id }, { $set: updatedProduct });
 		if (!updateInfo.matchedCount && !updateInfo.modifiedCount) throw 'Update failed';

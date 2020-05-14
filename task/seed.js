@@ -15,7 +15,7 @@ const main = async () => {
         price: 50,
         rating: 5,
         color:"white",
-        sellCount:0});
+        sellCount:0 });
 await products.addProduct({			
         name: "Baby Jacket",
         description: "It's a black baby jacket. Looks fashionable and great for outdoor acitvity.",
