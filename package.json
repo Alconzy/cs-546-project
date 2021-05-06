@@ -14,7 +14,7 @@
     "express-hbs": "^2.3.3",
     "express-session": "^1.17.1",
     "hbs": "^4.1.1",
-    "highcharts": "^8.1.0",
+    "highcharts": "^9.0.0",
     "http-errors": "^1.7.3",
     "jquery": "^3.5.1",
     "materialize-css": "^1.0.0",
